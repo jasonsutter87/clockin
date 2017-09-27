@@ -54,16 +54,7 @@ class App extends Component {
   }
 
   render() {
-    let listItems;
     const history = this.state.history;
-    if(history.length > 0){
-        listItems = history.map((number) =>
-          <li key={number.toString()}>
-            {`Task:  ${number.task}   Start Time:  ${number.start_time}   Finish Time:  ${number.finish_time}`}
-          </li>
-        );
-    }
-
     return (
       <div>
         <div>
@@ -75,7 +66,31 @@ class App extends Component {
           <input type="submit" value={this.state.button_value} />
           </form>
           </div>
-          <div>{listItems}</div>
+          <div className="search-result">
+          <table style={{
+            'width': '100%',
+            'textAlign': 'left'
+            }}>
+            <thead>
+              <tr>
+                <th>Task</th>
+                <th>Start Time</th>
+                <th>Finish Time</th>
+              </tr>
+            </thead>
+            <tbody >
+              {history.map((item) =>
+                <tr key={JSON.stringify(item)}
+                >
+                  <td>{item.task}</td>
+                  <td>{item.start_time}</td>
+                  <td>{item.finish_time}</td>
+                </tr>
+              )
+            }
+            </tbody>
+          </table>
+        </div>
       </div>
     )
   }
