@@ -54,15 +54,28 @@ class App extends Component {
   }
 
   render() {
+    let listItems;
+    const history = this.state.history;
+    if(history.length > 0){
+        listItems = history.map((number) =>
+          <li key={number.toString()}>
+            {`Task:  ${number.task}   Start Time:  ${number.start_time}   Finish Time:  ${number.finish_time}`}
+          </li>
+        );
+    }
+
     return (
       <div>
-      <form onSubmit={this.handleSubmit}>
-        <label>
-          Name:
-          <input type="text" name="name" onChange={this.handleChange} />
-        </label>
-        <input type="submit" value={this.state.button_value} />
-        </form>
+        <div>
+        <form onSubmit={this.handleSubmit}>
+          <label>
+            Name:
+            <input type="text" name="name" onChange={this.handleChange} />
+          </label>
+          <input type="submit" value={this.state.button_value} />
+          </form>
+          </div>
+          <div>{listItems}</div>
       </div>
     )
   }
